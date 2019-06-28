@@ -9,8 +9,10 @@ const path = require('path');
 const app = require('express').Router();
 
 
-app.get('/', (req, res) => {
+app.get(/\/(homepage(\.pug)?)?$/i, (req, res) => {
 	console.log('[get:] "/"');
+	// if user enters eg "/" og "/homepage.pug" change it "/homepage"
+	if (req.url !== '/homepage') return res.redirect('/homepage');
 	res.render('homepage.pug')
 });
 
